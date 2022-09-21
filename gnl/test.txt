@@ -1,0 +1,8 @@
+this is the most impressing test.txt.
+
+how to operate only '\n' in a line.
+	
+Also, I wonder how to operate 'tap' in a line.
+HaHa test is over.
+I hope your success, sincerely.
+Good Luck!
