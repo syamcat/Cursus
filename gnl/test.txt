@@ -1,8 +1,4 @@
-this is the most impressing test.txt.
+I want to go home now.
 
-how to operate only '\n' in a line.
-	
-Also, I wonder how to operate 'tap' in a line.
-HaHa test is over.
-I hope your success, sincerely.
+Type the text to translate.
 Good Luck!

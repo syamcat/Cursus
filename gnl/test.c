@@ -15,7 +15,7 @@ int	main(void)
 	{
 		read(fd, buff, BUFF_SIZE);
 		printf("%s", buff);
-		printf("%d", fd);
+		printf("%zd", ck);
 		close(fd);
 	}
 	else
