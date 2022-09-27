@@ -6,16 +6,18 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 09:18:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/27 20:38:10 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/27 22:30:14 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
-
+	if (!s)
+		return (0);
 	idx = 0;
 	while (s[idx])
 		idx++;
@@ -38,7 +40,7 @@ static char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char	*ft_strndup(const char *s1, int n)
+static char	*ft_strndup(char *s1, int n)
 {
 	int		idx;
 	int		len_s1;
@@ -46,7 +48,7 @@ static char	*ft_strndup(const char *s1, int n)
 
 	idx = 0;
 	len_s1 = n;
-	result = (char *)malloc(sizeof(const char) * len_s1 + 1);
+	result = (char *)malloc(sizeof(char) * len_s1 + 1);
 	if (!result)
 		return (NULL);
 	while (idx < len_s1)
@@ -58,7 +60,7 @@ static char	*ft_strndup(const char *s1, int n)
 	return (result);
 }
 
-static char	*ft_strchop(char *str, char *store)
+static char	*ft_strchop(char *str)
 {
 	char	*result;
 	int		idx;
@@ -70,59 +72,124 @@ static char	*ft_strchop(char *str, char *store)
 		idx++;
 	if (str[idx] == '\n')
 		idx++;
-	result = ft_strndup(str, idx);
-	store = ft_strjoin(store, &str[idx]);
+	result = malloc(idx + 1);
+	idx = 0;
+	while (str[idx] != '\n' && str[idx])
+	{
+		result[idx] = str[idx];
+		idx++;
+	}
+	if (str[idx] == '\n')
+		result[idx++] = '\n';
+	result[idx] = '\0';
 	return (result);
 }
 
-static char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*result;
-	size_t	len_s1;
-	size_t	len_s2;
-	size_t	idx;
+// static char	*ft_strjoin(char *s1, char *s2)
+// {
+// 	char	*result;
+// 	size_t	len_s1;
+// 	size_t	len_s2;
+// 	size_t	idx;
 
-	if (!(s1 && s2))
+// 	if (!s1)
+// 		s1 = malloc(1);
+// 	s1[0] = '\0';
+// 	len_s1 = ft_strlen(s1);
+// 	len_s2 = ft_strlen(s2);
+// 	result = (char *)malloc(len_s1 + len_s2 + 1);
+// 	idx = -1;
+// 	if (!result)
+// 		return (0);
+// 	while (++idx < len_s1)
+// 		result[idx] = s1[idx];
+// 	idx = -1;
+// 	while (++idx < len_s2)
+// 		result[len_s1 + idx] = s2[idx];
+// 	result[len_s1 + idx] = '\0';
+// 	free(s1);
+// 	return (result);
+// }
+
+static char	*ft_strjoin(char *str, char *buff)
+{
+	char	*ret;
+	size_t	i;
+	size_t	j;
+
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(buff) + 1));
+	if (!ret)
 		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	result = (char *)malloc(len_s1 + len_s2 + 1);
-	idx = -1;
-	if (!result)
-		return (0);
-	while (++idx < len_s1)
-		result[idx] = s1[idx];
-	idx = -1;
-	while (++idx < len_s2)
-		result[len_s1 + idx] = s2[idx];
-	result[len_s1 + idx] = '\0';
-	free(s2);
-	return (result);
+	if (!str)
+	{
+		str = (char *)malloc(1);
+		str[0] = '\0';
+	}
+	if (!str || !buff)
+		return (NULL);
+	i = -1;
+	while (str[++i])
+		ret[i] = str[i];
+	j = 0;
+	while (buff[j])
+		ret[i++] = buff[j++];
+	ret[i] = '\0';
+	free(str);
+	return (ret);
+}
+
+char *new_str(char *s)
+{
+	char		*ret;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	while ((s[i] != '\n') && s[i])
+		i++;
+	if(s[i] == '\0')
+	{
+		free(s);
+		return (NULL);
+	}
+	i++;
+	ret = malloc(ft_strlen(s) - i + 1);
+	while(s[i])
+		ret[j++] = s[i++];
+	free(s);
+	return (ret);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*store;
 	ssize_t		rd_size;
-	char		buff[BUFFER_SIZE];
+	char		buff[BUFFER_SIZE + 1];
+	char		*tmp;
 	char		*result;
 
-	store = ft_strndup("", 0);
+	// store = ft_strndup("", 0); 
 	result = NULL;
-	while (0 < (rd_size = read(fd, buff, BUFFER_SIZE - 2)))
+	printf("STORE : %s\n",store);
+	while (0 < (rd_size = read(fd, buff, BUFFER_SIZE)))
 	{
-		buff[BUFFER_SIZE - 1] = '\0';
+		buff[BUFFER_SIZE] = '\0';
 		if (!ft_strchr(buff, '\n'))
 		{
-			store = ft_strjoin(store, ft_strndup(buff, BUFFER_SIZE));
+			store = ft_strjoin(store, buff);
+			// printf("%s\n",store);
 			continue ;
 		}
 		else
 		{
-			result = ft_strjoin(store, ft_strchop(buff, store));
+			store = ft_strjoin(store, buff);
+			printf("%s\n",store);
 			break ;
 		}
 	}
+	result = ft_strchop(store);
+	store = new_str(store);
 	if (rd_size < 0)
 		return (NULL);
 	return (result);
