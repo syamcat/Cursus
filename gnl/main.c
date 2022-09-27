@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 17:25:07 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/27 20:25:41 by dohyeoki         ###   ########.fr       */
+/*   Created: 2022/09/27 19:56:32 by dohyeoki          #+#    #+#             */
+/*   Updated: 2022/09/27 20:38:06 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
-
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-static size_t	ft_strlen(const char *s);
-static char	*ft_strchr(const char *s, int c);
-static char	*ft_strndup(const char *s1, int n);
-static char	*ft_strchop(char *str, char *store);
-static char	*ft_strjoin(char *s1, char *s2);
-char	*get_next_line(int fd);
+#include "test1.c"
+#include "get_next_line.h"
 
-#endif
+int	main(void)
+{
+	int		fd;
+	char	*result;
+
+	printf("---------------this is result---------------\n\n");
+	if (0 < (fd = open("./test.txt", O_RDONLY)))
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			result = get_next_line(fd);
+			printf("%s", result);
+		}
+	}	
+	else
+		printf("fail");
+
+	return 0;
+}

@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohyeoki <dohyeoki@student.42.kr>          +#+  +:+       +#+        */
+/*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 09:18:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/22 21:56:01 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:38:10 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
 
@@ -26,7 +22,7 @@ size_t	ft_strlen(const char *s)
 	return (idx);
 }
 
-int	ft_strchr(const char *s, int c)
+static char	*ft_strchr(const char *s, int c)
 {
 	size_t	idx;
 	size_t	len;
@@ -36,27 +32,13 @@ int	ft_strchr(const char *s, int c)
 	while (idx <= len)
 	{
 		if (s[idx] == (char)c)
-			return (idx);
+			return ((char *)(s + idx));
 		idx++;
-	}
-	return (0);
-}
-
-char	*ft_strrchr(const char *s, int c)
-{
-	int	len;
-
-	len = ft_strlen(s);
-	while (len >= 0)
-	{
-		if (s[len] == (char)c)
-			return ((char *)(s + len));
-		len--;
 	}
 	return (NULL);
 }
 
-char	*ft_strndup(const char *s1, int n)
+static char	*ft_strndup(const char *s1, int n)
 {
 	int		idx;
 	int		len_s1;
@@ -76,7 +58,24 @@ char	*ft_strndup(const char *s1, int n)
 	return (result);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ft_strchop(char *str, char *store)
+{
+	char	*result;
+	int		idx;
+
+	idx = 0;
+	if (!str)
+		return (NULL);
+	while (str[idx] != '\n' && str[idx])
+		idx++;
+	if (str[idx] == '\n')
+		idx++;
+	result = ft_strndup(str, idx);
+	store = ft_strjoin(store, &str[idx]);
+	return (result);
+}
+
+static char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*result;
 	size_t	len_s1;
@@ -97,40 +96,34 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (++idx < len_s2)
 		result[len_s1 + idx] = s2[idx];
 	result[len_s1 + idx] = '\0';
+	free(s2);
 	return (result);
 }
 
-int main(void)
+char	*get_next_line(int fd)
 {
-	char		*result;
-	static char	*tmp;
-	char		buff[BUFFER_SIZE];
-	int			fd;
+	static char	*store;
 	ssize_t		rd_size;
+	char		buff[BUFFER_SIZE];
+	char		*result;
 
-	result = ft_strndup("", 0);
-	tmp = ft_strndup("", 0);
-	if (0 < (fd = open("./test.txt", O_RDONLY)))
+	store = ft_strndup("", 0);
+	result = NULL;
+	while (0 < (rd_size = read(fd, buff, BUFFER_SIZE - 2)))
 	{
-		while (0 < (rd_size = read(fd, buff, BUFFER_SIZE - 1)))
+		buff[BUFFER_SIZE - 1] = '\0';
+		if (!ft_strchr(buff, '\n'))
 		{
-			buff[rd_size] = '\0';
-			printf("%s\n", buff);
-			if (!ft_strchr(buff, '\n'))
-				tmp = ft_strjoin(tmp, buff);
-			else 
-			{
-				tmp = ft_strjoin(tmp, ft_strndup(buff, ft_strchr(buff, '\n') + 1));
-				result = ft_strjoin(result, tmp);
-				if (buff[BUFFER_SIZE - 1] != '\n')
-					tmp = ft_strndup(ft_strrchr(buff, '\n') + 1, ft_strlen(ft_strrchr(buff, '\n')));
-			}
+			store = ft_strjoin(store, ft_strndup(buff, BUFFER_SIZE));
+			continue ;
 		}
-		result = ft_strjoin(result, tmp);
-		close (fd);
-	}	
-	else
-		printf("fail");
-	printf("---------------this is result---------------\n%s\n", result);
-	return 0;
+		else
+		{
+			result = ft_strjoin(store, ft_strchop(buff, store));
+			break ;
+		}
+	}
+	if (rd_size < 0)
+		return (NULL);
+	return (result);
 }

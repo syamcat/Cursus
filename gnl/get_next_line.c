@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:24:28 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/12 17:24:28 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:14:02 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	buff[BUFFER_SIZE];	// 버퍼 선언
+	char	buff[BUFFER_SIZE];	// 버퍼 선언
 	ssize_t		ck; 				// read 함수로 읽어온 바이트 수 저장할 변수 선언
 
 	ch = 1;
