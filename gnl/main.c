@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:56:32 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/27 22:30:36 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:03:29 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int	main(void)
 	int		fd;
 	char	*result;
 
-	printf("---------------this is result---------------\n\n");
+	printf("\n\n---------------this is result---------------\n\n");
 	if (0 < (fd = open("./test.txt", O_RDONLY)))
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			result = get_next_line(fd);
-			// printf("str[%d]%s", i, result);
+			printf("str[%d]%s", i, result);
+			free (result);
 		}
 	}	
 	else

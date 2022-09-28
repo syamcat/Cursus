@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 09:18:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/27 22:30:14 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:04:42 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,33 @@
 static size_t	ft_strlen(const char *s)
 {
 	size_t	idx;
+
 	if (!s)
 		return (0);
 	idx = 0;
 	while (s[idx])
 		idx++;
 	return (idx);
+}
+
+void	ft_bnull(void *s, size_t n)
+{
+	unsigned char	*result;
+	size_t			idx;
+
+	idx = 0;
+	if (n == 0)
+		return ;
+	else
+	{
+		result = (unsigned char *)s;
+		while (idx < n)
+		{
+			result[idx] = '\0';
+			idx++;
+		}
+	}
+	return ;
 }
 
 static char	*ft_strchr(const char *s, int c)
@@ -40,25 +61,25 @@ static char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static char	*ft_strndup(char *s1, int n)
-{
-	int		idx;
-	int		len_s1;
-	char	*result;
+// static char	*ft_strndup(char *s1, int n)
+// {
+// 	int		idx;
+// 	int		len_s1;
+// 	char	*result;
 
-	idx = 0;
-	len_s1 = n;
-	result = (char *)malloc(sizeof(char) * len_s1 + 1);
-	if (!result)
-		return (NULL);
-	while (idx < len_s1)
-	{
-		result[idx] = s1[idx];
-		idx++;
-	}
-	result[idx] = '\0';
-	return (result);
-}
+// 	idx = 0;
+// 	len_s1 = n;
+// 	result = (char *)malloc(sizeof(char) * len_s1 + 1);
+// 	if (!result)
+// 		return (NULL);
+// 	while (idx < len_s1)
+// 	{
+// 		result[idx] = s1[idx];
+// 		idx++;
+// 	}
+// 	result[idx] = '\0';
+// 	return (result);
+// }
 
 static char	*ft_strchop(char *str)
 {
@@ -138,59 +159,99 @@ static char	*ft_strjoin(char *str, char *buff)
 	return (ret);
 }
 
-char *new_str(char *s)
+char	*new_str(char *s)
 {
-	char		*ret;
-	int			i;
-	int			j;
+	char	*ret;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
 	while ((s[i] != '\n') && s[i])
 		i++;
-	if(s[i] == '\0')
+	if (s[i] == '\0')
 	{
 		free(s);
 		return (NULL);
 	}
 	i++;
 	ret = malloc(ft_strlen(s) - i + 1);
-	while(s[i])
+	while (s[i])
 		ret[j++] = s[i++];
+	ret[j] = '\0';
 	free(s);
 	return (ret);
 }
+
+// void	ft_get_line(int fd, char *buff,ssize_t rd_size, char *store, char *result)
+// {
+// 	while (1)
+// 	{
+// 		rd_size = read(fd, buff, BUFFER_SIZE);
+// 		if (0 <= rd_size)
+// 		{
+// 			buff[BUFFER_SIZE] = '\0';
+// 			if (ft_strchr(buff, '\n') || rd_size < BUFFER_SIZE)
+// 			{
+// 				store = ft_strjoin(store, buff);
+// 				ft_bnull(buff, ft_strlen(buff));
+// 				break ;
+// 			}
+// 			else
+// 			{
+// 				store = ft_strjoin(store, buff);
+// 				ft_bnull(buff, ft_strlen(buff));
+// 				continue ;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			result = NULL;
+// 			return ;
+// 		}
+// 	}
+// }
 
 char	*get_next_line(int fd)
 {
 	static char	*store;
 	ssize_t		rd_size;
 	char		buff[BUFFER_SIZE + 1];
-	char		*tmp;
 	char		*result;
 
-	// store = ft_strndup("", 0); 
 	result = NULL;
-	printf("STORE : %s\n",store);
-	while (0 < (rd_size = read(fd, buff, BUFFER_SIZE)))
+	// ft_bnull(buff, ft_strlen(buff));
+	// rd_size = 0;
+	// store = malloc(1);
+	// if (!store)
+	// 	return (NULL);
+	// store[0] = '\0';
+	// ft_get_line(fd, buff, rd_size, store, result);
+	while (1)
 	{
-		buff[BUFFER_SIZE] = '\0';
-		if (!ft_strchr(buff, '\n'))
+		rd_size = read(fd, buff, BUFFER_SIZE);
+		if (0 <= rd_size)
 		{
-			store = ft_strjoin(store, buff);
-			// printf("%s\n",store);
-			continue ;
+			buff[BUFFER_SIZE] = '\0';
+			if (ft_strchr(buff, '\n') || rd_size == 0)
+			{
+				store = ft_strjoin(store, buff);
+				ft_bnull(buff, ft_strlen(buff));
+				break ;
+			}
+			else
+			{
+				store = ft_strjoin(store, buff);
+				ft_bnull(buff, ft_strlen(buff));
+				continue ;
+			}
 		}
 		else
-		{
-			store = ft_strjoin(store, buff);
-			printf("%s\n",store);
-			break ;
-		}
+			break;
 	}
 	result = ft_strchop(store);
 	store = new_str(store);
-	if (rd_size < 0)
-		return (NULL);
+	// if (rd_size < 0)
+	// 	return (NULL);
 	return (result);
 }
