@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 09:18:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/28 22:04:42 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:49:24 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ static char	*ft_strchop(char *str)
 		idx++;
 	if (str[idx] == '\n')
 		idx++;
-	result = malloc(idx + 1);
+	result = (char *)malloc(sizeof(char) * (idx + 1));
+	if (!result)
+		return (NULL);
 	idx = 0;
 	while (str[idx] != '\n' && str[idx])
 	{
@@ -165,6 +167,8 @@ char	*new_str(char *s)
 	int		i;
 	int		j;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while ((s[i] != '\n') && s[i])
@@ -183,35 +187,6 @@ char	*new_str(char *s)
 	return (ret);
 }
 
-// void	ft_get_line(int fd, char *buff,ssize_t rd_size, char *store, char *result)
-// {
-// 	while (1)
-// 	{
-// 		rd_size = read(fd, buff, BUFFER_SIZE);
-// 		if (0 <= rd_size)
-// 		{
-// 			buff[BUFFER_SIZE] = '\0';
-// 			if (ft_strchr(buff, '\n') || rd_size < BUFFER_SIZE)
-// 			{
-// 				store = ft_strjoin(store, buff);
-// 				ft_bnull(buff, ft_strlen(buff));
-// 				break ;
-// 			}
-// 			else
-// 			{
-// 				store = ft_strjoin(store, buff);
-// 				ft_bnull(buff, ft_strlen(buff));
-// 				continue ;
-// 			}
-// 		}
-// 		else
-// 		{
-// 			result = NULL;
-// 			return ;
-// 		}
-// 	}
-// }
-
 char	*get_next_line(int fd)
 {
 	static char	*store;
@@ -220,38 +195,23 @@ char	*get_next_line(int fd)
 	char		*result;
 
 	result = NULL;
-	// ft_bnull(buff, ft_strlen(buff));
-	// rd_size = 0;
-	// store = malloc(1);
-	// if (!store)
-	// 	return (NULL);
-	// store[0] = '\0';
-	// ft_get_line(fd, buff, rd_size, store, result);
 	while (1)
 	{
+		ft_bnull(buff, ft_strlen(buff));
 		rd_size = read(fd, buff, BUFFER_SIZE);
 		if (0 <= rd_size)
 		{
 			buff[BUFFER_SIZE] = '\0';
-			if (ft_strchr(buff, '\n') || rd_size == 0)
-			{
-				store = ft_strjoin(store, buff);
-				ft_bnull(buff, ft_strlen(buff));
+			store = ft_strjoin(store, buff);
+			if (ft_strchr(buff, '\n') || rd_size == 0)	
 				break ;
-			}
 			else
-			{
-				store = ft_strjoin(store, buff);
-				ft_bnull(buff, ft_strlen(buff));
 				continue ;
-			}
 		}
 		else
 			break;
 	}
 	result = ft_strchop(store);
 	store = new_str(store);
-	// if (rd_size < 0)
-	// 	return (NULL);
 	return (result);
 }

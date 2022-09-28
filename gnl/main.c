@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:56:32 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/28 22:03:29 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:23:40 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(void)
 		{
 			result = get_next_line(fd);
 			printf("str[%d]%s", i, result);
-			free (result);
+			// free (result);
 		}
 	}	
 	else
