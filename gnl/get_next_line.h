@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:25:07 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/28 23:40:31 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/29 03:17:00 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@
 # include <stdlib.h>
 
 size_t	ft_strlen(const char *s);
-char		*ft_strchr(const char *s, int c);
-void		ft_bnull(void *s, size_t n);
-char		*ft_strchop(char *str);
-char		*ft_strjoin(char *str, char *buff);
-static char		*new_str(char *s);
-char			*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+void	ft_bnull(void *s, size_t n);
+char	*ft_strchop(char *str);
+char	*ft_strjoin(char *str, char *buff);
+char	*get_next_line(int fd);
 
 #endif

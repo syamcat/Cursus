@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:20:26 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/28 23:40:02 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/29 03:49:24 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_strchop(char *str)
 	int		idx;
 
 	idx = 0;
-	if (!str)
+	if (!str || !(str[idx]))
 		return (NULL);
 	while (str[idx] != '\n' && str[idx])
 		idx++;

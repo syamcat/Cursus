@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:24:28 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/28 23:38:39 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/10/11 18:58:39 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ char	*get_next_line(int fd)
 		ft_bnull(buff, ft_strlen(buff));
 		rd_size = read(fd, buff, BUFFER_SIZE);
 		if (rd_size < 0)
+		{
+			store = NULL;
 			break ;
-		buff[BUFFER_SIZE] = '\0';
+		}
+		buff[rd_size] = '\0';
 		store = ft_strjoin(store, buff);
 		if (ft_strchr(buff, '\n') || rd_size == 0)
 			break ;
