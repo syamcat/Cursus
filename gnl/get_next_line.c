@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 17:24:28 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/10/11 18:58:39 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:26:15 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,15 @@ static char	*new_str(char *s)
 	return (ret);
 }
 
-char	*get_next_line(int fd)
+static char	*ft_adstore(char *store, int fd)
 {
-	static char	*store;
 	ssize_t		rd_size;
-	char		buff[BUFFER_SIZE + 1];
-	char		*result;
+	char		*buff;
 
-	result = NULL;
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if (!buff)
+		return (NULL);
+	ft_bnull(buff, BUFFER_SIZE + 1);
 	while (1)
 	{
 		ft_bnull(buff, ft_strlen(buff));
@@ -62,6 +63,17 @@ char	*get_next_line(int fd)
 		else
 			continue ;
 	}
+	free(buff);
+	return (store);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*store;
+	char		*result;
+
+	result = NULL;
+	store = ft_adstore(store, fd);
 	result = ft_strchop(store);
 	store = new_str(store);
 	return (result);

@@ -6,13 +6,13 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:20:26 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/09/29 03:49:24 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/10/13 20:27:50 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	idx;
 
@@ -44,7 +44,7 @@ void	ft_bnull(void *s, size_t n)
 	return ;
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	size_t	idx;
 	size_t	len;
