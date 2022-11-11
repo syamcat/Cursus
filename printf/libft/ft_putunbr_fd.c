@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pro.c                                              :+:      :+:    :+:   */
+/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohyeoki <dohyeoki@student.42.kr>          +#+  +:+       +#+        */
+/*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 19:19:32 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/10/26 19:23:14 by dohyeoki         ###   ########.fr       */
+/*   Created: 2022/11/11 17:17:14 by dohyeoki          #+#    #+#             */
+/*   Updated: 2022/11/11 17:24:46 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+# include "libft.h"
 
-int	ft_printf(const char *str, ...)
+int	ft_putunbr_fd(unsigned int nb, int fd, int len)
 {
-	int	i;
+	char	num;
 
-	i = 0;
-	while (1)
+	if (nb >= 10)
 	{
-		
+		len += ft_putunbr_fd(nb / 10, fd, len);
+		nb = nb % 10;
+	}
+	num = nb + '0';
+	write(fd, &num, 1);
+	return (len);
+}

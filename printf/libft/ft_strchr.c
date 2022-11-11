@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 12:57:36 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/10/24 09:40:51 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:40:32 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strchr(const char *s, int c)
 	size_t	idx;
 	size_t	len;
 
-	if (!s || !c)
-		return NULL;
 	idx = 0;
 	len = ft_strlen(s);
 	while (idx <= len)

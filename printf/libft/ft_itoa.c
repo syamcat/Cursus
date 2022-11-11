@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	ft_intlen(int n)
+int	ft_intlen(int n)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ static int	ft_intlen(int n)
 	return (len);
 }
 
-static void	ft_input_num(char *str, int num, int len)
+void	ft_input_num(char *str, int num, int len)
 {
 	int	div;
 	int	idx;

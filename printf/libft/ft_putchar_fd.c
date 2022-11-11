@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:58:06 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/08/25 13:06:09 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:07:00 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
-	return ;
+		return (0);
+	return (write(fd, &c, 1));
 }
