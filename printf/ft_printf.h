@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 18:33:33 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/11/11 14:53:22 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:42:40 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define ABS(Value) ((Value < 0) * (-Value) + (Value >= 0) * (Value))
+int	ft_printf(const char *str, ...);
 
 #endif
