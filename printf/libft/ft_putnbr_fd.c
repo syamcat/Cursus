@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 15:26:46 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/11/11 17:17:30 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:49:57 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	ft_print_nb(int nb, int fd, int len)
 	num = nb + '0';
 	write(fd, &num, 1);
 	return (len);
-	
 }
 
 int	ft_putnbr_fd(int n, int fd)

@@ -6,7 +6,7 @@
 #    By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/11 17:29:12 by dohyeoki          #+#    #+#              #
-#    Updated: 2022/11/11 17:41:15 by dohyeoki         ###   ########.fr        #
+#    Updated: 2022/11/13 15:57:30 by dohyeoki         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME = libftprintf.a
 
 HEADER = ./ft_printf.h
 
-SRCS =	ft_printf.c
+SRCS =	ft_printf.c ft_conv_s.c
 
 OBJS = $(SRCS:.c=.o)
 
