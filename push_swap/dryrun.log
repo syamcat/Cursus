@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/goinfre/dohyeoki/push_swap'
+make -C ./libft/ bonus
+ 
+make: Leaving directory `/goinfre/dohyeoki/push_swap'
+ 
