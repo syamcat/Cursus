@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 00:01:01 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/12 14:03:27 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/19 15:28:15 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	sa(t_list **stack_a)
 	if (stack_a == NULL || *stack_a == NULL)
 		return (0);
 	swap(stack_a);
-	// ft_putstr_fd("sa\n", 1);
+	ft_putstr_fd("sa\n", 1);
 	return (1);
 }
 
@@ -37,7 +37,7 @@ int	sb(t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	swap(stack_b);
-	// ft_putstr_fd("sb\n", 1);
+	ft_putstr_fd("sb\n", 1);
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int	ss(t_list **stack_a, t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	swap(stack_b);
-	// ft_putstr_fd("ss\n", 1);
+	ft_putstr_fd("ss\n", 1);
 	return (1);
 }
 
@@ -69,7 +69,7 @@ int	pa(t_list **stack_b, t_list **stack_a)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	push(stack_b, stack_a);
-	// ft_putstr_fd("pa\n", 1);
+	ft_putstr_fd("pa\n", 1);
 	return (1);
 }
 
@@ -78,7 +78,7 @@ int	pb(t_list **stack_a, t_list **stack_b)
 	if (stack_a == NULL || *stack_a == NULL)
 		return (0);
 	push(stack_a, stack_b);
-	// ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("pb\n", 1);
 	return (1);
 }
 
@@ -100,7 +100,7 @@ int	ra(t_list **stack_a)
 	if (stack_a == NULL || *stack_a == NULL)
 		return (0);
 	rotate(stack_a);
-	// ft_putstr_fd("ra\n", 1);
+	ft_putstr_fd("ra\n", 1);
 	return (1);
 }
 
@@ -109,7 +109,7 @@ int	rb(t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	rotate(stack_b);
-	// ft_putstr_fd("rb\n", 1);
+	ft_putstr_fd("rb\n", 1);
 	return (1);
 }
 
@@ -121,7 +121,7 @@ int	rr(t_list **stack_a, t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	rotate(stack_b);
-	// ft_putstr_fd("rr\n", 1);
+	ft_putstr_fd("rr\n", 1);
 	return (1);
 }
 
@@ -146,7 +146,7 @@ int	rra(t_list **stack_a)
 	if (stack_a == NULL || *stack_a == NULL)
 		return (0);
 	rev_rotate(stack_a);
-	// ft_putstr_fd("rra\n", 1);
+	ft_putstr_fd("rra\n", 1);
 	return (1);
 }
 
@@ -155,7 +155,7 @@ int	rrb(t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	rev_rotate(stack_b);
-	// ft_putstr_fd("rrb\n", 1);
+	ft_putstr_fd("rrb\n", 1);
 	return (1);
 }
 
@@ -167,6 +167,6 @@ int	rrr(t_list **stack_a, t_list **stack_b)
 	if (stack_b == NULL || *stack_b == NULL)
 		return (0);
 	rev_rotate(stack_b);
-	// ft_putstr_fd("rrr\n", 1);
+	ft_putstr_fd("rrr\n", 1);
 	return (1);
 }

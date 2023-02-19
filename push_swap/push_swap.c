@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/19 15:14:53 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/19 20:59:15 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	*select_pivot(t_list *stack, int count)
 	}
 	// pivot[0] = base[count / 3];
 	// pivot[1] = base[count / 3 * 2];
+	free(base);
 	return (pivot);
 }
 
@@ -255,93 +256,86 @@ int	select_biggest(t_list *stack, int count)
 	return (base[count - 1]);
 }
 
-void	list_sort_b(t_list **stack_a, t_list **stack_b, int com)
+// void	list_sort_b(t_list **stack_a, t_list **stack_b, int com)
+// {
+// 	int	smallest;
+// 	int	count_pa;
+// 	int	tmp;
+// 	t_list	*ptr;
+
+// 	if (com == 0)
+// 		return ;
+// 	smallest = select_smallest(*stack_b, com);
+// 	count_pa = 0;
+// 	while (com--)
+// 	{
+// 		tmp = (*stack_b)->content;
+// 		if (tmp > smallest)
+// 			count_pa += pa(stack_b, stack_a);
+// 		else
+// 			rb(stack_b);
+// 	}
+// 	if (ft_lstsize(*stack_b) > 1)
+// 		rrb(stack_b);
+// 	list_sort_a(stack_a, stack_b, count_pa);
+// }
+
+// void	list_sort_a(t_list **stack_a, t_list **stack_b, int com)
+// {
+// 	int	biggest;
+// 	int count_pb;
+// 	int	tmp;
+// 	t_list	*ptr;
+
+// 	if (com == 0)
+// 	{
+// 		ptr = (*stack_b);
+// 		while (ptr)
+// 		{
+// 			pa(stack_b, stack_a);
+// 			ptr = (*stack_b)->next;
+// 		}
+// 		pa(stack_b, stack_a);
+// 		return ;
+// 	}
+// 	biggest = select_biggest(*stack_a, com);
+// 	count_pb = 0;
+// 	while (com--)
+// 	{
+// 		tmp = (*stack_a)->content;
+// 		if (tmp < biggest)
+// 			count_pb += pb(stack_a, stack_b);
+// 		else
+// 			ra(stack_a);
+// 	}
+// 	if (ft_lstsize(*stack_a) > 1)
+// 		rra(stack_a);
+// 	list_sort_b(stack_a, stack_b, count_pb);
+// }
+
+int	is_sorted(t_list **stack)
 {
-	int	smallest;
-	int	count_pa;
-	int	tmp;
-	t_list	*ptr;
+	int	count;
+	int	*base;
+	int	*refer;
+	int	result;
 
-	printf("______list_sort_b______\n");
-	printf("com: %d\n", com);
-	if (com == 0)
+	count = ft_lstsize(*stack);
+	base = presort(stack, count);
+	refer = (int *)malloc(sizeof(int) * count);
+	ptr = stack;
+	i = 0;
+//	while (ptr)
+	while (tmp--)
 	{
-		// ptr = (*stack_b);
-		// printf("ptr: %d\n", ptr->content);
-		// while (ptr)
-		// {
-		// 	pa(stack_b, stack_a);
-		// 	ptr = (*stack_b)->next;
-		// }
-		return ;
+		refer[i] = ptr->content;
+		ptr = ptr->next;
+		i++;
 	}
-	print_list(*stack_a, *stack_b);
-	smallest = select_smallest(*stack_b, com);
-	printf("smallest: %d\n", smallest);
-	count_pa = 0;
-	while (com--)
-	{
-		tmp = (*stack_b)->content;
-		if (tmp > smallest)
-		{
-			count_pa += pa(stack_b, stack_a);
-			printf("here: %d, %d\n", tmp, smallest);
-		}
-		else
-			rb(stack_b);
-	}
-	if (ft_lstsize(*stack_b) > 1)
-		rrb(stack_b);
-	// printf("count_pa_last: %d\n", count_pa);
-	print_list(*stack_a, *stack_b);
-	printf("count_pa: %d\n", count_pa);
-	list_sort_a(stack_a, stack_b, count_pa);
-}
+	result = 
 
-void	list_sort_a(t_list **stack_a, t_list **stack_b, int com)
-{
-	int	biggest;
-	int count_pb;
-	int	tmp;
-	t_list	*ptr;
-
-	printf("_____list_sort_a_____\n");
-	// if (com == 0)
-	// 	return ;
-	printf("com: %d\n", com);
-	if (com == 0)
-	{
-		ptr = (*stack_b);
-		printf("ptr: %d\n", ptr->content);
-		while (ptr)
-		{
-			pa(stack_b, stack_a);
-			ptr = (*stack_b)->next;
-		}
-		pa(stack_b, stack_a);
-		return ;
-	}
-	biggest = select_biggest(*stack_a, com);
-	printf("biggest: %d\n", biggest);
-	count_pb = 0;
-	while (com--)
-	{
-		tmp = (*stack_a)->content;
-		// printf("tmp: %d\n", tmp);
-		if (tmp < biggest)
-		{
-			count_pb += pb(stack_a, stack_b);
-			printf("here: %d, %d\n", tmp, biggest);
-		}
-		else
-			ra(stack_a);
-		// printf("com: %d\n", com);
-	}
-	if (ft_lstsize(*stack_a) > 1)
-		rra(stack_a);
-	printf("count_pb_last: %d\n", count_pb);
-	print_list(*stack_a, *stack_b);
-	list_sort_b(stack_a, stack_b, count_pb);
+	free(base);
+	free(refer);
 }
 
 void	push_swap(t_list **stack_a, t_list **stack_b)
@@ -361,7 +355,8 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	if (ft_lstsize(*stack_a) < 4)
 		sort_ascending(stack_a);
 	else
-		list_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));
+		// test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));
+			
 	// sort_descending(stack_a);
 	// sa(stack_a);
 	// sb(stack_b);
