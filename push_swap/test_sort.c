@@ -6,11 +6,31 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:33:51 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/19 20:40:36 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/20 15:52:52 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	select_smallest(t_list *stack, int count)
+{
+	int		*base;
+
+	if (count <= 0)
+		return 0;
+	base = presort(stack, count);
+	return (base[0]);
+}
+
+int	select_biggest(t_list *stack, int count)
+{
+	int		*base;
+
+	if (count <= 0)
+		return 0;
+	base = presort(stack, count);
+	return (base[count - 1]);
+}
 
 void	test_sort_b(t_list **stack_a, t_list **stack_b, int com)
 {
