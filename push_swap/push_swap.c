@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/20 15:56:12 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:29:10 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,24 @@ int	issorted(t_list *stack)
 	return (result);
 }
 
+void	push_to_stack_a(t_list **stack_b, t_list **stack_a)
+{
+	t_list	*ptr;
+
+	ptr = *stack_b;
+	printf ("ptr: %p\n", stack_b);
+	while (ptr)
+	{
+		printf("!!!!!!!!here!!!!!!!!\n");
+		pa(stack_b, stack_a);
+		/*
+			알고리즘
+					*/
+		ptr = *stack_b;
+	}
+		
+}
+
 int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 {
 	int	tmp;
@@ -245,12 +263,11 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
 {
 	int	*pivot;
-
 	// printf("com: %d\n", com);
 	if (remain <= 3)
 	{
 		sort_ascending(stack_a); //완료
-		// push_to_stack_a();
+		push_to_stack_a(stack_b, stack_a);
 		return ;
 	}
 	else

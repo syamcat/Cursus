@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:34:37 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/20 15:57:05 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:25:59 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int		sa(t_list **stack_a);								// swap명령어 사용과 sa출력, 1반환
 int		sb(t_list **stack_b);								// swap명령어 사용과 sb출력, 1반환
 int		ss(t_list **stack_a, t_list **stack_b);
 void	push(t_list **stack_frm, t_list **stack_dst);
-int		pa(t_list **stack_b, t_list **stack_a);
-int		pb(t_list **stack_a, t_list **stack_b);
+int		pa(t_list **stack_b, t_list **stack_a);				// from b to a
+int		pb(t_list **stack_a, t_list **stack_b);				// from a to b
 void	rotate(t_list **stack);
 int		ra(t_list **stack_a);
 int		rb(t_list **stack_b);
