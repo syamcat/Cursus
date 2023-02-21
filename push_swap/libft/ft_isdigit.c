@@ -6,19 +6,25 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 17:11:27 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/02 19:07:45 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:04:48 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 int	ft_isdigit(char *c)
 {
 	int	i;
 
 	i = 0;
+	printf("str: %s\n", c);
 	while (c[i])
 	{
-		if ((i == 0 && c[i] != '-') && (c[i] < '0' || c[i] > '9'))
-			return (0);
+		if (c[i] < '0' || c[i] > '9')
+		{
+			if (!(i == 0 && c[i] == '-'))
+				return (0);
+		}
 		i++;
 	}
 	return (1);

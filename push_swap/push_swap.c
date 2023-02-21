@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/20 16:29:10 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:06:45 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,8 +332,8 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	else if (ft_lstsize(*stack_a) < 4)
 		sort_ascending(stack_a);
 	else
-		sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a));
-		// test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));  // 정상적으로 잘 정렬되는 알고리즘
+		// sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a));
+		test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));  // 정상적으로 잘 정렬되는 알고리즘
 		// printf("issorted: %d\n", issorted(*stack_a)); // 이미 정렬이 되어있는지 확인하는 함수
 		
 	// sort_descending(stack_a);
