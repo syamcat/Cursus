@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:39:17 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/11 19:52:35 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:28:22 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	sort_ascending_2(t_list **stack)
 	if (Sequence == 0) // top->12 (complete)
 		return ;
 	else if (Sequence == 1) // top->21
-		swap(stack);
+		sa(stack);
 }
 
 int	how_sort_ascending_3(t_list *stack)
@@ -66,38 +66,86 @@ int	how_sort_ascending_3(t_list *stack)
 	return (0);
 }
 
+void	ascend_seqn_5(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		sa(stack);
+		ra(stack);
+		sa(stack);
+		rra(stack);
+		sa(stack);
+	}
+	else
+	{
+		sa(stack);
+		rra(stack);
+	}
+}
+
+void	ascend_seqn_4(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		ra(stack);
+		sa(stack);
+		rra(stack);
+		sa(stack);
+	}
+	else
+		rra(stack);
+}
+
+void	ascend_seqn_3(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		sa(stack);
+		ra(stack);
+		sa(stack);
+		rra(stack);
+	}
+	else
+		ra(stack);
+}
+
+void	ascend_sqen_2(t_list **stack)
+{
+		if (ft_lstsize(*stack) > 3)
+	{
+		ra(stack);
+		sa(stack);
+		rra(stack);
+	}
+	else
+	{
+		rra(stack);
+		sa(stack);
+	}
+}
+
 void	sort_ascending_3(t_list **stack)
 {
 	int	Sequence;
 
-	// printf("here\n");
 	Sequence = how_sort_ascending_3(*stack);
 	if (Sequence == 0) // top->123 (complete)
 		return ;
 	else if (Sequence == 1) // top->213
-		swap(stack);
+		sa(stack);
 	else if (Sequence == 2) // top->132
-	{
-		rev_rotate(stack);
-		swap(stack);
-	}
+		ascend_sqen_2(stack);
 	else if (Sequence == 3) // top->312
-		rotate(stack);
+		ascend_seqn_3(stack);
 	else if (Sequence == 4) // top->231
-		rev_rotate(stack);
+		ascend_seqn_4(stack);
 	else if (Sequence == 5) // top->321
-	{
-		swap(stack);
-		rev_rotate(stack);
-	}
+		ascend_seqn_5(stack);
 	return ;
 }
 
-void	sort_ascending(t_list **stack)
+void	sort_ascending(t_list **stack, int count)
 {
-	int	count;
-
-	count = ft_lstsize(*stack);
 	if (count == 1)
 		return ;
 	if (count == 2)

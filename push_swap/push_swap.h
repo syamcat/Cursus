@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:34:37 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/20 16:25:59 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:29:52 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		intncmp(int *i1, int *i2, int num);					// int리스트의 값이 일치하
 t_list	*init_stack(void);									// 스택을 초기화
 // t_list	*init_stack(t_list *tmp);
 void	set_stack_a(t_list *stack_a, int argc, char *argv[]);
+
 // operation.c
 void	swap(t_list **stack);
 int		sa(t_list **stack_a);								// swap명령어 사용과 sa출력, 1반환
@@ -66,16 +67,24 @@ void	rev_rotate(t_list **stack);
 int		rra(t_list **stack_a);
 int		rrb(t_list **stack_b);
 int		rrr(t_list **stack_a, t_list **stack_b);
+
 // error.c
 void	chk_arg(int argc, char *argv[]);
 int		isvaild(int rec, int *arr);
 void	error(int err);
+
 // sort_ascending.c
-void	sort_ascending(t_list **stack);
+void	sort_ascending(t_list **stack, int count);
 void	sort_ascending_3(t_list **stack);
 int		how_sort_ascending_3(t_list *stack);
+void	ascend_seqn_5(t_list **stack);
+void	ascend_seqn_4(t_list **stack);
+void	ascend_seqn_3(t_list **stack);
+void	ascend_sqen_2(t_list **stack);
 void	sort_ascending_2(t_list **stack);
 int		how_sort_ascending_2(t_list *stack);
+
+
 // sort_descending.c
 int		how_sort_descending_2(t_list *stack);
 void	sort_descending_2(t_list **stack);

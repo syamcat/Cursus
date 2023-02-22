@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:40:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/12 13:51:00 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:42:41 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sort_descending_2(t_list **stack)
 	if (Sequence == 0) // top->21 (complete)
 		return ;
 	else if (Sequence == 1) // top->12
-		swap(stack);
+		sb(stack);
 }
 
 int	how_sort_descending_3(t_list *stack)

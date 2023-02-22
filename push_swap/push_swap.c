@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/21 18:06:45 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 15:30:37 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,7 +266,7 @@ void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
 	// printf("com: %d\n", com);
 	if (remain <= 3)
 	{
-		sort_ascending(stack_a); //완료
+		sort_ascending(stack_a, remain); //완료
 		push_to_stack_a(stack_b, stack_a);
 		return ;
 	}
@@ -315,25 +315,13 @@ void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
 
 void	push_swap(t_list **stack_a, t_list **stack_b)
 {
-	// int	*s_num;
-	// int	*pivot;
-
-	// s_num = presort(*stack_a, 7);
-	// printf("presort: ");
-	// for (int idx =  0; idx < ft_lstsize(*stack_a); idx++)
-	// 	printf("%d  ", s_num[idx]);
-	// printf("\n");
-	// pivot = select_pivot(*stack_a, ft_lstsize(*stack_a));
-	// printf("pivot[0]: %d, pivot[1]: %d\n", pivot[0], pivot[1]);
-	// sort_ascending(stack_a);
-	// sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a), 0, 0);
 	if (issorted(*stack_a))
 		return ;
 	else if (ft_lstsize(*stack_a) < 4)
-		sort_ascending(stack_a);
+		sort_ascending(stack_a, ft_lstsize(*stack_a));
 	else
-		// sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a));
-		test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));  // 정상적으로 잘 정렬되는 알고리즘
+		sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a));
+		// test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));  // 정상적으로 잘 정렬되는 알고리즘
 		// printf("issorted: %d\n", issorted(*stack_a)); // 이미 정렬이 되어있는지 확인하는 함수
 		
 	// sort_descending(stack_a);
