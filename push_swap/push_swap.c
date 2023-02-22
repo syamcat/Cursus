@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/22 16:28:12 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:50:33 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 	int	tmp;
 	int	c_rb;
 	int	c_ra;
+	int	result;
 
 	c_rb = 0;
 	c_ra = 0;
@@ -246,8 +247,10 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 		// tmp = 스택A의 top // 연산할 대상
 		tmp = (*stack_a)->content;
 		if (tmp >= pivot[1])		// tmp >= 피봇[큰것]
+		{
 			if (num > 1)
 				c_ra += ra(stack_a);			// ra명령으로 뒤로 넘긴다 //ra호출횟수++;
+		}
 		else
 		{
 			pb(stack_a, stack_b);	//pb명령으로 b로 보낸다 //pb호출횟수++;
@@ -256,9 +259,16 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 		}
 	}
 	free(pivot);
+	result = c_ra;
 	while (c_rb--)		// while (ra호출횟수, rb호출횟수)
 		rrb(stack_b);		// rb호출한 만큼 rrb해서 큰 값 올려주기 //[3]과 [2]를 스택 앞으로 가져온다
-	return (c_ra);
+	while (c_ra--)
+		rra(stack_a);
+	// while (c_rb--)
+	// 	rrb(stack_b);
+	// while (c_ra--)
+	// 	rra(stack_a);
+	return (result);
 }
 
 void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
