@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/22 18:50:33 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/22 19:41:43 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 		tmp = (*stack_a)->content;
 		if (tmp >= pivot[1])		// tmp >= 피봇[큰것]
 		{
-			if (num > 1)
+			if (ft_lstsize(*stack_a) > 1)
 				c_ra += ra(stack_a);			// ra명령으로 뒤로 넘긴다 //ra호출횟수++;
 		}
 		else
@@ -274,11 +274,13 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
 {
 	int	*pivot;
-	// printf("com: %d\n", com);
+
 	if (remain <= 3)
 	{
+		print_list(*stack_a, *stack_b);
+		printf("remain: %d\n", remain);
 		sort_ascending(stack_a, remain); //완료
-		push_to_stack_a(stack_b, stack_a);
+		// push_to_stack_a(stack_b, stack_a);
 		return ;
 	}
 	else
