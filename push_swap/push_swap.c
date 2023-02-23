@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/22 19:41:43 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/23 13:02:41 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,23 +215,42 @@ int	issorted(t_list *stack)
 	return (result);
 }
 
-void	push_to_stack_a(t_list **stack_b, t_list **stack_a)
+void	push_to_stack_a(t_list **stack_b, t_list **stack_a, int num)
 {
-	t_list	*ptr;
+	int	tmp;
+	int	c_rb;
+	int	c_ra;
+	int	result;
 
-	ptr = *stack_b;
-	printf ("ptr: %p\n", stack_b);
-	while (ptr)
+	c_rb = 0;
+	c_ra = 0;
+	while (num--)					// com개의 원소에 대해서
 	{
-		printf("!!!!!!!!here!!!!!!!!\n");
-		pa(stack_b, stack_a);
-		/*
-			알고리즘
-					*/
-		ptr = *stack_b;
+		// tmp = 스택A의 top // 연산할 대상
+		tmp = (*stack_b)->content;
+		if (tmp < pivot[0])		// tmp >= 피봇[큰것]
+		{
+			if (ft_lstsize(*stack_b) > 1)
+				c_rb += rb(stack_b);			// ra명령으로 뒤로 넘긴다 //ra호출횟수++;
+		}
+		else
+		{
+			pa(stack_b, stack_a);	//pb명령으로 b로 보낸다 //pb호출횟수++;
+			if (tmp < pivot[1])	//tmp >= 피봇 [작은것]
+				c_ra += ra(stack_a);		//rb명령으로 뒤로 넘긴다 //rb호출횟수++;
+		}
 	}
-		
-}
+	free(pivot);
+	result = c_rb;
+	while (c_rb--)		// while (ra호출횟수, rb호출횟수)
+		rrb(stack_b);		// rb호출한 만큼 rrb해서 큰 값 올려주기 //[3]과 [2]를 스택 앞으로 가져온다
+	while (c_ra--)
+		rra(stack_a);
+	// while (c_rb--)
+	// 	rrb(stack_b);
+	// while (c_ra--)
+	// 	rra(stack_a);
+	return (result);
 
 int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 {
@@ -275,7 +294,7 @@ void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
 {
 	int	*pivot;
 
-	if (remain <= 3)
+	if (ft_lstsize(*stack_a) <= 3)
 	{
 		print_list(*stack_a, *stack_b);
 		printf("remain: %d\n", remain);
