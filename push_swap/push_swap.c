@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/23 17:41:42 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:52:41 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,10 @@ int	sort_stack_b(t_list **stack_a, t_list **stack_b, int num)
 	int	*pivot;
 
 	if (num <= 3)
+	{
 		sort_descending(stack_b, num);
+		return (0);
+	}
 	c_rb = 0;
 	c_ra = 0;
 	c_pa = 0;
@@ -284,6 +287,7 @@ int	sort_stack_a(t_list **stack_a, t_list **stack_b, int num)
 	{
 		print_list(*stack_a, *stack_b);
 		sort_ascending(stack_a, num);
+		return (0);
 		print_list(*stack_a, *stack_b);
 	}
 	c_rb = 0;
