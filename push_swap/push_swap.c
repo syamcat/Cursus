@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/23 13:02:41 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:41:42 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,15 +215,41 @@ int	issorted(t_list *stack)
 	return (result);
 }
 
-void	push_to_stack_a(t_list **stack_b, t_list **stack_a, int num)
+void	b_to_a_all(t_list **stack_a, t_list **stack_b)
+{
+	t_list *ptr;
+
+	ptr = *stack_b;
+	while (ptr)
+	{
+		pa(stack_b, stack_a);
+		ptr = *stack_b;
+	}
+}
+
+void	rr_stack(t_list **stack_a, t_list **stack_b, int c_ra, int c_rb)
+{
+	while (c_rb--)		// while (ra호출횟수, rb호출횟수)
+		rrb(stack_b);		// rb호출한 만큼 rrb해서 큰 값 올려주기 //[3]과 [2]를 스택 앞으로 가져온다
+	while (c_ra--)
+		rra(stack_a);
+}
+
+
+int	sort_stack_b(t_list **stack_a, t_list **stack_b, int num)
 {
 	int	tmp;
 	int	c_rb;
 	int	c_ra;
-	int	result;
+	int	c_pa;
+	int	*pivot;
 
+	if (num <= 3)
+		sort_descending(stack_b, num);
 	c_rb = 0;
 	c_ra = 0;
+	c_pa = 0;
+	pivot = select_pivot(*stack_b, num);
 	while (num--)					// com개의 원소에 대해서
 	{
 		// tmp = 스택A의 top // 연산할 대상
@@ -235,32 +261,35 @@ void	push_to_stack_a(t_list **stack_b, t_list **stack_a, int num)
 		}
 		else
 		{
-			pa(stack_b, stack_a);	//pb명령으로 b로 보낸다 //pb호출횟수++;
+			c_pa += pa(stack_b, stack_a);	//pb명령으로 b로 보낸다 //pb호출횟수++;
 			if (tmp < pivot[1])	//tmp >= 피봇 [작은것]
 				c_ra += ra(stack_a);		//rb명령으로 뒤로 넘긴다 //rb호출횟수++;
 		}
 	}
 	free(pivot);
-	result = c_rb;
-	while (c_rb--)		// while (ra호출횟수, rb호출횟수)
-		rrb(stack_b);		// rb호출한 만큼 rrb해서 큰 값 올려주기 //[3]과 [2]를 스택 앞으로 가져온다
-	while (c_ra--)
-		rra(stack_a);
-	// while (c_rb--)
-	// 	rrb(stack_b);
-	// while (c_ra--)
-	// 	rra(stack_a);
-	return (result);
+	rr_stack(stack_a, stack_b, c_ra, c_rb);
+	sort_stack_b(stack_a, stack_b, c_rb);
+	return (c_pa);
+}
 
-int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
+int	sort_stack_a(t_list **stack_a, t_list **stack_b, int num)
 {
 	int	tmp;
 	int	c_rb;
 	int	c_ra;
-	int	result;
+	int	c_pb;
+	int	*pivot;
 
+	if (num <= 3)
+	{
+		print_list(*stack_a, *stack_b);
+		sort_ascending(stack_a, num);
+		print_list(*stack_a, *stack_b);
+	}
 	c_rb = 0;
 	c_ra = 0;
+	c_pb = 0;
+	pivot = select_pivot(*stack_a, num);
 	while (num--)					// com개의 원소에 대해서
 	{
 		// tmp = 스택A의 top // 연산할 대상
@@ -272,87 +301,37 @@ int	push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot)
 		}
 		else
 		{
-			pb(stack_a, stack_b);	//pb명령으로 b로 보낸다 //pb호출횟수++;
+			c_pb += pb(stack_a, stack_b);	//pb명령으로 b로 보낸다 //pb호출횟수++;
 			if (tmp >= pivot[0])	//tmp >= 피봇 [작은것]
 				c_rb += rb(stack_b);		//rb명령으로 뒤로 넘긴다 //rb호출횟수++;
 		}
 	}
 	free(pivot);
-	result = c_ra;
-	while (c_rb--)		// while (ra호출횟수, rb호출횟수)
-		rrb(stack_b);		// rb호출한 만큼 rrb해서 큰 값 올려주기 //[3]과 [2]를 스택 앞으로 가져온다
-	while (c_ra--)
-		rra(stack_a);
-	// while (c_rb--)
-	// 	rrb(stack_b);
-	// while (c_ra--)
-	// 	rra(stack_a);
-	return (result);
-}
-
-void	sort_stack_a(t_list **stack_a, t_list **stack_b, int remain)
-{
-	int	*pivot;
-
-	if (ft_lstsize(*stack_a) <= 3)
-	{
-		print_list(*stack_a, *stack_b);
-		printf("remain: %d\n", remain);
-		sort_ascending(stack_a, remain); //완료
-		// push_to_stack_a(stack_b, stack_a);
-		return ;
-	}
-	else
-	{
-		pivot = select_pivot(*stack_a, remain);
-		printf("sort_stack_a: pivot[0]: %d, pivot[1]:%d\n", pivot[0], pivot[1]);
-		remain = push_to_stack_b(stack_a, stack_b, remain, pivot);
-		sort_stack_a(stack_a, stack_b, remain);
-	}
-	// 스택A 원소 중에서 "적절한" 피봇을 2개 선택한다 // 완료
-	// pivot = select_pivot(*stack_a, com);
-	// printf("sort_stack_a: pivot[0]: %d, pivot[1]:%d\n", pivot[0], pivot[1]);
-	// while (com--)					// com개의 원소에 대해서
-	// {
-	// 	// tmp = 스택A의 top // 연산할 대상
-	// 	tmp = (*stack_a)->content;
-	// 	if (tmp >= pivot[1])		// tmp >= 피봇[큰것]
-	// 		c_ra += ra(stack_a);			// ra명령으로 뒤로 넘긴다 //ra호출횟수++;
-	// 	else
-	// 	{
-	// 		c_pb += pb(stack_a, stack_b);	//pb명령으로 b로 보낸다 //pb호출횟수++;
-	// 		if (tmp >= pivot[0])	//tmp >= 피봇 [작은것]
-	// 			c_rb += rb(stack_b);		//rb명령으로 뒤로 넘긴다 //rb호출횟수++;
-	// 	}
-	// }
-	// free(pivot);
-	// i = c_ra;
-	// j = c_rb;
-	// while (i-- && j--)		// while (ra호출횟수, rb호출횟수)
-	// 	rrr(stack_a, stack_b);		// rrr호출 //[3]과 [2]를 스택 앞으로 가져온다
-	// if (i > 0)
-	// {
-	// 	ra(stack_a);
-	// 	i--;
-	// }
-	// if (j > 0)
-	// {
-	// 	rb(stack_b);
-	// 	j--;
-	// }
-	// sort_stack_a(stack_a, stack_b, c_ra, 0, 0); // [3]정렬 / sort_stack_a(stack_a, stack_b, ra호출 횟수)
-	// sort_stack_b(stack_a, stack_b, c_rb, 0, 0); // [2]정렬 / sort_stack_b(stack_a, stack_b, rb호출 횟수)
-	// sort_stack_b(stack_a, stack_b, c_pb - c_rb, 0, 0); // [1]정렬 / sort_stack_b(stack_a, stack_b, pb호출 횟수 - rb 호출 횟수)
+	rr_stack(stack_a, stack_b, c_ra, c_rb);
+	sort_stack_a(stack_a, stack_b, c_ra);
+	return (c_pb);
 }
 
 void	push_swap(t_list **stack_a, t_list **stack_b)
 {
+
+	int	num;
+
 	if (issorted(*stack_a))
 		return ;
 	else if (ft_lstsize(*stack_a) < 4)
 		sort_ascending(stack_a, ft_lstsize(*stack_a));
 	else
-		sort_stack_a(stack_a, stack_b, ft_lstsize(*stack_a));
+	{
+		num = ft_lstsize(*stack_a);
+		while (num)
+		{
+			num = sort_stack_a(stack_a, stack_b, num);
+			num = sort_stack_b(stack_a, stack_b, num);
+		}
+		if (ft_lstsize(*stack_b))
+			b_to_a_all(stack_a, stack_b);
+	}
 		// test_sort_a(stack_a, stack_b, ft_lstsize(*stack_a));  // 정상적으로 잘 정렬되는 알고리즘
 		// printf("issorted: %d\n", issorted(*stack_a)); // 이미 정렬이 되어있는지 확인하는 함수
 		

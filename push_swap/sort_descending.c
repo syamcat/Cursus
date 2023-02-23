@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:40:15 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/22 14:42:41 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:35:31 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,86 @@ int	how_sort_descending_3(t_list *stack)
 	return (0);
 }
 
+void	descend_seqn_5(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		sb(stack);
+		rb(stack);
+		sb(stack);
+		rrb(stack);
+		sb(stack);
+	}
+	else
+	{
+		sb(stack);
+		rrb(stack);
+	}
+}
+
+void	descend_seqn_4(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		rb(stack);
+		sb(stack);
+		rrb(stack);
+		sb(stack);
+	}
+	else
+		rrb(stack);
+}
+
+void	descend_seqn_3(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		sb(stack);
+		rb(stack);
+		sb(stack);
+		rrb(stack);
+	}
+	else
+		rb(stack);
+}
+
+void	descend_seqn_2(t_list **stack)
+{
+	if (ft_lstsize(*stack) > 3)
+	{
+		rb(stack);
+		sb(stack);
+		rrb(stack);
+	}
+	else
+	{
+		rrb(stack);
+		sb(stack);
+	}
+}
+
 void	sort_descending_3(t_list **stack)
 {
 	int	Sequence;
 
 	Sequence = how_sort_descending_3(*stack);
-	if (Sequence == 0) // top->123 (complete)
+	if (Sequence == 0) // top->321 (complete)
 		return ;
-	else if (Sequence == 1) // top->213
-		swap(stack);
-	else if (Sequence == 2) // top->132
-	{
-		rev_rotate(stack);
-		swap(stack);
-	}
-	else if (Sequence == 3) // top->312
-		rotate(stack);
-	else if (Sequence == 4) // top->231
-		rev_rotate(stack);
-	else if (Sequence == 5) // top->321
-	{
-		swap(stack);
-		rev_rotate(stack);
-	}
+	else if (Sequence == 1) // top->231
+		sb(stack);
+	else if (Sequence == 2) // top->312
+		descend_seqn_2(stack);
+	else if (Sequence == 3) // top->132
+		descend_seqn_3(stack);
+	else if (Sequence == 4) // top->213
+		descend_seqn_4(stack);
+	else if (Sequence == 5) // top->123
+		descend_seqn_5(stack);
 	return ;
 }
 
-void	sort_descending(t_list **stack)
+void	sort_descending(t_list **stack, int count)
 {
-	int	count;
-
-	count = ft_lstsize(*stack);
 	if (count == 1)
 		return ;
 	if (count == 2)

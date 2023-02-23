@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 20:34:37 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/22 15:29:52 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/23 17:34:24 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int		select_biggest(t_list *stack, int count);			// 스택에서 제일 큰 값�
 
 // push_swap.c
 // void	sort_stack_b(t_list **stack_a, t_list **stack_b, int com, int i, int j);
-int		push_to_stack_b(t_list **stack_a, t_list **stack_b, int num, int *pivot);
-void	sort_stack_a(t_list **stack_a, t_list **stack_b, int num);
+void	rr_stack(t_list **stack_a, t_list **stack_b, int c_ra, int c_rb);
+void	b_to_a_all(t_list **stack_a, t_list **stack_b);
+// int		sort_stack_b(t_list **stack_a, t_list **stack_b, int num);
+// int		sort_stack_a(t_list **stack_a, t_list **stack_b, int num);
 void 	qs_swap(int *a, int *b);
 void 	quickSort(int *result,int start, int end);			// presort함수에서 사용하는 퀵소트 함수
 int		*presort(t_list *stack, int count);					// 스택을 사전 정렬해보는 함수
@@ -89,7 +91,11 @@ int		how_sort_ascending_2(t_list *stack);
 int		how_sort_descending_2(t_list *stack);
 void	sort_descending_2(t_list **stack);
 int		how_sort_descending_3(t_list *stack);
+void	descend_seqn_5(t_list **stack);
+void	descend_seqn_4(t_list **stack);
+void	descend_seqn_3(t_list **stack);
+void	descend_seqn_2(t_list **stack);
 void	sort_descending_3(t_list **stack);
-void	sort_descending(t_list **stack);
+void	sort_descending(t_list **stack, int count);
 
 #endif
