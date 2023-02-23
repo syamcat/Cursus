@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/23 17:52:41 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/24 01:30:47 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,10 +285,10 @@ int	sort_stack_a(t_list **stack_a, t_list **stack_b, int num)
 
 	if (num <= 3)
 	{
-		print_list(*stack_a, *stack_b);
+		// print_list(*stack_a, *stack_b);
 		sort_ascending(stack_a, num);
 		return (0);
-		print_list(*stack_a, *stack_b);
+		// print_list(*stack_a, *stack_b);
 	}
 	c_rb = 0;
 	c_ra = 0;
@@ -378,8 +378,8 @@ int	main(int argc, char	*argv[])
 		push_swap(&stack_a, &stack_b);
 		// free_stack(stack_a);
 		// free_stack(stack_b);
-		printf("this is final result: ");
-		print_list(stack_a, stack_b);
+		// printf("this is final result: ");
+		// print_list(stack_a, stack_b);
 	}
 	free(stack_a);
 	free(stack_b);
