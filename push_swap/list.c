@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 21:18:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/24 19:42:52 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:42:49 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,23 @@ void	set_stack_a(t_list *stack_a, int argc, char *argv[])
 	while (i < argc)
 	{
 		cont = ft_split(argv[i] , ' ');
+		// for (int idx = 0; cont[idx];)
+		// {
+		// 	printf("count[%d]: %s\n", idx, cont[idx]);
+		// 	idx++;
+		// }
 		j = 0;
 		if (i == 1)
 		{
 			if (cont) // 수정의 여지 있음 (cont[j]로 할지)
 				stack_a->content = ft_atoi(cont[j]);
-			i++;
-			continue;
+			j++;
 		}
 		while (cont[j])
 		{
+			// printf("cont[]: %s\n", cont[j]);
 			ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(cont[j])));
+			// printf("here\n");
 			j++;
 		}
 		free(cont);

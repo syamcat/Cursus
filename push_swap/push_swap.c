@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/24 19:41:46 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/24 21:46:14 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,7 @@ int	sort_stack_a(t_list **stack_a, t_list **stack_b, int num)
 		else
 		{
 			c_pb += pb(stack_a, stack_b);	//pb명령으로 b로 보낸다 //pb호출횟수++;
-			if (tmp >= pivot[0])	//tmp >= 피봇 [작은것]
+			if (tmp >= pivot[0] && ft_lstsize(*stack_b) > 0)	//tmp >= 피봇 [작은것]
 				c_rb += rb(stack_b);		//rb명령으로 뒤로 넘긴다 //rb호출횟수++;
 		}
 	}
@@ -370,17 +370,14 @@ int	main(int argc, char	*argv[])
 	idx = argc - 1;
 	stack_a = init_stack();
 	stack_b = NULL;
-	if (1)
-	{
-		set_stack_a(stack_a, argc, argv);
-		// push_swap(&stack_a, &stack_b);
-		// print_list(stack_a, stack_b);
-		push_swap(&stack_a, &stack_b);
-		// free_stack(stack_a);
-		// free_stack(stack_b);
-		printf("this is final result: ");
-		print_list(stack_a, stack_b);
-	}
+	set_stack_a(stack_a, argc, argv);
+	// push_swap(&stack_a, &stack_b);
+	// print_list(stack_a, stack_b);
+	push_swap(&stack_a, &stack_b);
+	// free_stack(stack_a);
+	// free_stack(stack_b);
+	// printf("this is final result: ");
+	// print_list(stack_a, stack_b);
 	free(stack_a);
 	free(stack_b);
 	// system("leaks push_swap");
