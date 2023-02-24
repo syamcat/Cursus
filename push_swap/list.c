@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 21:18:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/12 19:53:59 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:42:52 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,33 @@ t_list	*init_stack(void)
 	return (tmp);
 }
 
-// void	free_stack(t_list *stack)
-// {
-//		t_list	*ptr;
-// 		if (stack)
-// 		{
-// 			while (stack->next->next)
-// 				stack = stack->next;
-// 			while (stack->prev)
-// 			{
-// 				free(stack->next);
-// 				stack = stack->prev;
-// 			}
-// 			free(ptr);
-// 		}
-// }
-
 void	set_stack_a(t_list *stack_a, int argc, char *argv[])
 {
-	int	idx;
+	int	i;
+	int	j;
+	int	size;
+	char **cont;
 
-	idx = 1;
-	while (idx < argc)
+	i = 1;
+	while (i < argc)
 	{
-		if (idx == 1)
+		cont = ft_split(argv[i] , ' ');
+		j = 0;
+		if (i == 1)
 		{
-			stack_a->content = ft_atoi(argv[idx]);
-			idx++;
+			if (cont) // 수정의 여지 있음 (cont[j]로 할지)
+				stack_a->content = ft_atoi(cont[j]);
+			i++;
 			continue;
 		}
-		ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(argv[idx])));
+		while (cont[j])
+		{
+			ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(cont[j])));
+			j++;
+		}
+		free(cont);
 		// printf("add_here: %d\n", stack_a->content);
-		idx++;
+		i++;
 	}
 }
 

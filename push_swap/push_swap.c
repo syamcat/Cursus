@@ -6,7 +6,7 @@
 /*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:31:38 by dohyeoki          #+#    #+#             */
-/*   Updated: 2023/02/24 01:30:47 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/02/24 19:41:46 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,8 +378,8 @@ int	main(int argc, char	*argv[])
 		push_swap(&stack_a, &stack_b);
 		// free_stack(stack_a);
 		// free_stack(stack_b);
-		// printf("this is final result: ");
-		// print_list(stack_a, stack_b);
+		printf("this is final result: ");
+		print_list(stack_a, stack_b);
 	}
 	free(stack_a);
 	free(stack_b);
