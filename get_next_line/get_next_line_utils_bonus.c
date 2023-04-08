@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dohyeoki <dohyeoki@student@42seoul.kr>     +#+  +:+       +#+        */
+/*   By: dohyeoki <dohyeoki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 23:20:26 by dohyeoki          #+#    #+#             */
-/*   Updated: 2022/10/13 20:27:50 by dohyeoki         ###   ########.fr       */
+/*   Updated: 2023/04/08 11:56:05 by dohyeoki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen2(char *s, int cased, t_file **lst)
 {
 	size_t	idx;
+	t_file	*ptr;
 
-	if (!s)
-		return (0);
-	idx = 0;
-	while (s[idx])
-		idx++;
-	return (idx);
+	if (cased == 1)
+	{
+		if (!s)
+			return (0);
+		idx = 0;
+		while (s[idx])
+			idx++;
+		return (idx);
+	}
+	else
+	{
+		while (*lst != NULL)
+		{
+			ptr = (*lst)->next;
+			free((*lst)->store);
+			free(*lst);
+			*lst = ptr;
+		}
+	}
+	return (0);
 }
 
 void	ft_bnull(void *s, size_t n)
@@ -50,7 +65,7 @@ char	*ft_strchr(char *s, int c)
 	size_t	len;
 
 	idx = 0;
-	len = ft_strlen(s);
+	len = ft_strlen2(s, 1, 0);
 	while (idx <= len)
 	{
 		if (s[idx] == (char)c)
@@ -93,7 +108,7 @@ char	*ft_strjoin(char *str, char *buff)
 	size_t	i;
 	size_t	j;
 
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(buff) + 1));
+	ret = (char *)malloc(sizeof(char) * (ft_strlen2(str, 1, 0) + ft_strlen2(buff, 1, 0) + 1));
 	if (!ret)
 		return (NULL);
 	if (!str)
